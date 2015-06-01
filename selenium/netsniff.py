@@ -11,7 +11,7 @@ class CreateHars(unittest.TestCase):
     def test_pages(self):
         """
         This test visits pages and saves output .HAR files
-        using am API to cerate testable objects and parameters.
+        using an API to cerate testable objects and parameters.
         """
         domain = domain
         url = url
