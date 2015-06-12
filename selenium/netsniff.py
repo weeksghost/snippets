@@ -11,7 +11,7 @@ class CreateHars(unittest.TestCase):
     def test_pages(self):
         """
         This test visits pages and saves output .HAR files
-        using API to cerate testable objects and parameters.
+        using an API to cerate testable objects and parameters.
         """
         domain = domain
         url = url
@@ -20,8 +20,8 @@ class CreateHars(unittest.TestCase):
             r = requests.get(domain + url)
             json = r.json()
             for obj in json['objects']:
-                slug = obj['XXX']['XXXX'] # Create slug object
-                name = obj['XXX']['XXXX'] # Create name object
+                slug = obj['XXXX']['XXXX'] # Create slug object
+                name = obj['XXXX']['XXXX'] # Create name object
                 new_name = name.replace('/', '')
                 urls = domain + slug
                 current_dir = os.getcwd()
