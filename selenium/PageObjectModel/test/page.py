@@ -1,5 +1,5 @@
 from element import BasePageElement
-from locators import MainPageLocators, SearchResultsPageLocators
+from locators import MainPageLocators
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 
@@ -11,6 +11,7 @@ class BasePage(object):
 
     def __init__(self, resource_handler):
         self.driver = resource_handler.driver
+        self.resource_handler = resource_handler
 
 
     def wait_until(self, by, value, timeout=5, parent_element=None):

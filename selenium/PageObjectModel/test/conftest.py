@@ -8,6 +8,7 @@ class ResourceHandler(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
         self.driver.maximize_window()
+        self.driver.get('http://google.com')
 
 
     def release(self):
