@@ -1,4 +1,3 @@
-import page
 import pytest
 from unittestzero import Assert
 
@@ -14,6 +13,11 @@ class TestGoogleSearch(BaseTest):
         '''Search selenium from Google.com'''
         home_page = HomePage(mozwebqa)
         home_page.go_to_page()
+        import pdb; pdb.set_trace()
+        home_page.is_the_current_page
+        home_page.search_text(), 'selenium'
+        home_page.search_box_submit()
+        home_page.force_wait()
 
 
 
