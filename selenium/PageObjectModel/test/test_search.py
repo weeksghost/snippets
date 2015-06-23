@@ -10,9 +10,9 @@ from base_test import BaseTest
 class TestGoogleSearch(BaseTest):
 
     @pytest.mark.nondestructive
-    def test_search_selenium_from_google(self, qa):
+    def test_search_selenium_from_google(self, mozwebqa):
         '''Search selenium from Google.com'''
-        home_page = HomePage(qa)
+        home_page = HomePage(mozwebqa)
         home_page.go_to_page()
 
 

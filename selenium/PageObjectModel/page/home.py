@@ -15,7 +15,7 @@ class HomePage(Base):
         super(HomePage, self).__init__(testsetup)
 
     def go_to_page(self):
-        self.open('/')
+        self.open()
 
 
     def click_submit(self):

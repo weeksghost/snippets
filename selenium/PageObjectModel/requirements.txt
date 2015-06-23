@@ -1,0 +1,12 @@
+beautifulsoup4
+PyYAML==3.10
+UnittestZero
+certifi==0.0.8
+chardet==2.1.1
+execnet==1.1
+py==1.4.26
+pytest==2.7.0
+pytest-mozwebqa
+requests==2.6.0
+selenium
+wsgiref==0.1.2
