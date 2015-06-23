@@ -2,17 +2,34 @@ from element import BasePageElement
 from locators import MainPageLocators
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+from unittestzero import Assert
 
 
-class BasePage(object):
+class Page(object):
     '''Base page object'''
 
     implicit_wait = 10
 
-    def __init__(self, resource_handler):
-        self.driver = resource_handler.driver
-        self.resource_handler = resource_handler
+    def __init__(self, testsetup):
+        self.testsetup = testsetup
+        self.base_url = testsetup.base_url
+        self.selenium = testsetup.selenium
+        self.timeout = testsetup.timeout
 
+    def open(self):
+        self.selenium.get(self.base_url)
+
+    @property
+    def page_title(self):
+        WebDriverWait(self.selenium, self.timeout).until(lambda s: self.selenium.title)
+        return self.selenium.title
+
+    @property
+    def is_the_current_page(self):
+        if self._page_title:
+            Assert.equal(self.page_title, self._page_title,
+                         "Expected page title: %s. Actual page title: %s" % (self._page_title, self.page_title))
+        return True
 
     def wait_until(self, by, value, timeout=5, parent_element=None):
         if parent_element:
@@ -37,26 +54,13 @@ class BasePage(object):
         finally:
             self.driver.implicitly_wait(self.implicit_wait)
 
-
-class SearchTextElement(BasePageElement):
-
-    locator = 'q'
+    def get_url_current_page(self):
+        return(self.selenium.current_url)
 
 
-class MainPage(BasePage):
+class PageRegion(Page):
+    """Base class for a page region (generally an element in a list of elements)."""
 
-    search_text_element = SearchTextElement()
-
-    def is_title_matches(self):
-        return 'Google' in self.driver.title
-
-    def click_submit(self):
-        element = self.driver.find_element(*MainPageLocators.SUBMIT)
-        element.submit()
-
-
-class SearchResultsPage(BasePage):
-
-    def is_results_found(self):
-        # Non-specific search acceptance criteria
-        return 'No results found.' not in self.driver.page_source
+    def __init__(self, testsetup, element):
+        self._root_element = element
+        Page.__init__(self, testsetup)

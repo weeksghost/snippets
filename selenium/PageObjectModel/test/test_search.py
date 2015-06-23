@@ -1,21 +1,27 @@
 import page
 import pytest
-import unittest
-from conftest import resource_handler
+from unittestzero import Assert
+
+from page.home import HomePage
+from page.home import SearchResultsPage
+from base_test import BaseTest
 
 
-class GoogleSearch(unittest.TestCase):
+class TestGoogleSearch(BaseTest):
 
-    @pytest.mark.usefixtures('resource_handler')
-    def test_search_selenium_from_google(self, resource_handler=resource_handler):
+    @pytest.mark.nondestructive
+    def test_search_selenium_from_google(self, qa):
         '''Search selenium from Google.com'''
-        main_page = page.MainPage(resource_handler)
-        assert main_page.is_title_matches(), 'Google'
-        main_page.search_text_element = 'selenium'
-        main_page.click_submit()
-        search_page_results = page.SearchResultsPage(resource_handler)
-        assert search_page_results.is_results_found(), 'No results found.'
+        home_page = HomePage(qa)
+        home_page.go_to_page()
 
 
-if __name__ == '__main__':
-    unittest.main()
+
+
+        #main_page = page.MainPage()
+        #main_page.driver.get('http://google.com')
+        #assert main_page.is_title_matches(), 'Google'
+        #main_page.search_text_element = 'selenium'
+        #main_page.click_submit()
+        #search_page_results = page.SearchResultsPage()
+        #assert search_page_results.is_results_found(), 'No results found.'
