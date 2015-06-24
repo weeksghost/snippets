@@ -1,8 +1,5 @@
 import pytest
-from unittestzero import Assert
-
 from page.home import HomePage
-from page.home import SearchResultsPage
 from base_test import BaseTest
 
 
@@ -10,22 +7,12 @@ class TestGoogleSearch(BaseTest):
 
     @pytest.mark.nondestructive
     def test_search_selenium_from_google(self, mozwebqa):
-        '''Search selenium from Google.com'''
         home_page = HomePage(mozwebqa)
+        input_text = 'selenium'
+        result = home_page.result_output
         home_page.go_to_page()
-        import pdb; pdb.set_trace()
         home_page.is_the_current_page
-        home_page.search_text(), 'selenium'
+        home_page.search_text(input_text)
         home_page.search_box_submit()
         home_page.force_wait()
-
-
-
-
-        #main_page = page.MainPage()
-        #main_page.driver.get('http://google.com')
-        #assert main_page.is_title_matches(), 'Google'
-        #main_page.search_text_element = 'selenium'
-        #main_page.click_submit()
-        #search_page_results = page.SearchResultsPage()
-        #assert search_page_results.is_results_found(), 'No results found.'
+        home_page.is_element_present(result)

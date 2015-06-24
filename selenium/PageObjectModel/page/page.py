@@ -1,12 +1,15 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 from unittestzero import Assert
 import time
 
 
 class Page(object):
-    '''Base page object'''
+    """
+    Base class for all pages
+    """
 
     def __init__(self, testsetup):
         self.testsetup = testsetup
@@ -17,8 +20,12 @@ class Page(object):
             self, '_root_element') and self._root_element or \
             self.selenium
 
+    def refresh(self):
+        self.selenium.refresh()
+
     def open(self):
         self.selenium.get(self.base_url)
+        self.selenium.maximize_window()
 
     @property
     def page_title(self):
